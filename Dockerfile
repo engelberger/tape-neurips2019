@@ -58,11 +58,13 @@ ENV PATH=/opt/pyenv/versions/3.6.8/bin:${PATH} \
 
 RUN apt-get update && apt-get install -y gcc g++ git && apt-get clean
 
-RUN git clone https://github.com/rdedhia/docker-tape.git /docker-tape  
+RUN git clone -b 2023 https://github.com/engelberger/tape-neurips2019.git /tape-neurips2019
+
+
 
 #COPY setup.py .
 #COPY tape ./tape
-WORKDIR /docker-tape/
+WORKDIR /tape-neurips2019/
 # Install dependencies
 RUN /opt/pyenv/versions/3.6.8/bin/python -m pip install https://github.com/codecov/codecov-python/archive/refs/tags/v2.1.12.tar.gz
-#RUN
+RUN /opt/pyenv/versions/3.6.8/bin/python -m pip install --no-cache-dir -e .
